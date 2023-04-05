@@ -18,10 +18,10 @@ export default function Login({ clientCallback, loginCallback }) {
     try {
       e.preventDefault()
       if (clientId.length > 0) {
-        await axios.post("https://bankis-backend.azurewebsites.net/login",clientId)
+        await axios.post("https://bankis-backend.azurewebsites.net/login",`${clientId}`)
         .then(res => {
           console.log(res.data)
-          if(res.data == -1) {
+          if(res.data == "-1") {
             setLoginMsg('Neznámé klientské číslo, opakujte zadání.')
           } else {
             loginCode = res.data
