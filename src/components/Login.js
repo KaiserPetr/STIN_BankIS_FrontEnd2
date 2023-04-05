@@ -33,6 +33,7 @@ export default function Login({ clientCallback, loginCallback }) {
       }
     } catch (err) {
       console.log(err)
+      console.log(err.response.data)
     }
   } 
     
