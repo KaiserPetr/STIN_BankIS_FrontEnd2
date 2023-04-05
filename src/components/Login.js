@@ -20,6 +20,7 @@ export default function Login({ clientCallback, loginCallback }) {
       if (clientId.length > 0) {
         await axios.post("https://bankis-backend.azurewebsites.net/login",clientId)
         .then(res => {
+          console.log(res.data)
           if(res.data == -1) {
             setLoginMsg('Neznámé klientské číslo, opakujte zadání.')
           } else {
