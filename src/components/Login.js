@@ -18,6 +18,7 @@ export default function Login({ clientCallback, loginCallback }) {
     try {
       e.preventDefault()
       if (clientId.length > 0) {
+        console.log(clientId)
         await axios.post("https://bankis-backend.azurewebsites.net/login",`${clientId}`)
         .then(res => {
           console.log(res.data)
