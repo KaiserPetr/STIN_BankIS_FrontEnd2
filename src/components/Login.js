@@ -19,14 +19,13 @@ export default function Login({ clientCallback, loginCallback }) {
       e.preventDefault()
       if (clientId.length > 0) {
         console.log(clientId)
-        await axios.post("https://bankis-backend.azurewebsites.net/login",`${clientId}`)
+        await axios.post("https://stinbankisbackend2-production.up.railway.app/login",`${clientId}`)
         .then(res => {
           console.log(res.data)
           if(res.data == "-1") {
             setLoginMsg('Neznámé klientské číslo, opakujte zadání.')
           } else {
             loginCode = res.data
-            //console.log(loginCode)
             navigate("/verify")
             clientCallback(clientId)
             loginCallback(loginCode)
