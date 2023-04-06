@@ -81,7 +81,7 @@ export default function Account({ clientId, loginCallback }) {
                 let date = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear()
                 if (date != exRateDate){
                     if (today.getHours() == 10 && today.getMinutes() >= 20 && today.getMinutes <= 50){
-                        axios.get("https://bankis-backend.azurewebsites.net/downloadExchangeRates")
+                        axios.get("https://stinbankisbackend2-production.up.railway.app//downloadExchangeRates")
                         .then( res=> {
                             setExRateDate(res.data)
                         })
@@ -95,7 +95,7 @@ export default function Account({ clientId, loginCallback }) {
 
     React.useEffect(() => {
         try {
-            axios.post("https://bankis-backend.azurewebsites.net/getUserData",clientId)
+            axios.post("https://stinbankisbackend2-production.up.railway.app//getUserData",clientId)
             .then(res => {
                 setUserData(res.data);
                 
@@ -105,7 +105,7 @@ export default function Account({ clientId, loginCallback }) {
                 setAccountData(res.data);
                 setSelectedAccount(res.data[0])
                 handleUserAccounts(res.data)
-                axios.post("https://bankis-backend.azurewebsites.net/getTransactions",res.data[0].accountNumber)
+                axios.post("https://stinbankisbackend2-production.up.railway.app//getTransactions",res.data[0].accountNumber)
                 .then(resTrans => {
                     setTransactions([])
                     resTrans.data.forEach(t => {
@@ -120,7 +120,7 @@ export default function Account({ clientId, loginCallback }) {
                 setExRateDate(res.data)
             })
             */
-            axios.get("https://bankis-backend.azurewebsites.net/getAllCurrencies")
+            axios.get("https://stinbankisbackend2-production.up.railway.app//getAllCurrencies")
             .then(res => {
                 setAllCurrencies([]);
                 setAllCurrencies(res.data);
@@ -189,11 +189,11 @@ export default function Account({ clientId, loginCallback }) {
             setNewAccRes("Chyba, vyplňte všechna povinná pole.")
         } else {
             let params = [clientId,newAccNum,newAccCurr]
-            axios.post("https://bankis-backend.azurewebsites.net/createNewAccount",params)
+            axios.post("https://stinbankisbackend2-production.up.railway.app//createNewAccount",params)
             .then(res=> {
                 switch (res.data){
                     case 0:
-                        axios.post("https://bankis-backend.azurewebsites.net/getAccountsData",clientId)
+                        axios.post("https://stinbankisbackend2-production.up.railway.app//getAccountsData",clientId)
                         .then(res => {
                             setAccountData(res.data);
                             handleUserAccounts(res.data)
@@ -212,7 +212,7 @@ export default function Account({ clientId, loginCallback }) {
         for (let i = 0; i < accountData.length; i++){
             if (accountData[i].accountNumber === e.target.value){
                 setSelectedAccount(accountData[i])
-                axios.post("https://bankis-backend.azurewebsites.net/getTransactions",accountData[i].accountNumber)
+                axios.post("https://stinbankisbackend2-production.up.railway.app//getTransactions",accountData[i].accountNumber)
                 .then(resTrans => {
                     setTransactions([])
                     resTrans.data.forEach(t => {
@@ -226,7 +226,7 @@ export default function Account({ clientId, loginCallback }) {
     }
     
     const handleRndTrans = (e) => {
-        axios.post("https://bankis-backend.azurewebsites.net/generateRandomTransaction",selectedAccount.accountNumber)
+        axios.post("https://stinbankisbackend2-production.up.railway.app//generateRandomTransaction",selectedAccount.accountNumber)
             .then(res => {
                 setPayOperator(res.data['operation'])
                 setPayWrbtr(res.data['wrbtr'])
@@ -242,12 +242,12 @@ export default function Account({ clientId, loginCallback }) {
                 setPayResult("Chyba, vyplňte všecha povinná pole.")
             } else {
                 let params = [clientId,payOperator,payWrbtr,payCurrency]
-                axios.post("https://bankis-backend.azurewebsites.net/newTransaction",params)
+                axios.post("https://stinbankisbackend2-production.up.railway.app//newTransaction",params)
                 .then(resTrans => {
                     handleTransMessage(resTrans.data)
                     if (resTrans.data != 1 && resTrans.data != 0 ){
                         //refresh transakci
-                        axios.post("https://bankis-backend.azurewebsites.net/getTransactions",selectedAccount.accountNumber)
+                        axios.post("https://stinbankisbackend2-production.up.railway.app//getTransactions",selectedAccount.accountNumber)
                         .then(res => {
                             setTransactions([])
                             res.data.forEach(t => {
@@ -255,7 +255,7 @@ export default function Account({ clientId, loginCallback }) {
                                 setTransactions(transactions => [...transactions, newTransaction]);
                             })    
                         })
-                        axios.post("https://bankis-backend.azurewebsites.net/getAccountsData",clientId)
+                        axios.post("https://stinbankisbackend2-production.up.railway.app//getAccountsData",clientId)
                         .then(res => {
                             setAccountData(res.data);
                             for (let i = 0; i < res.data.length; i++){
