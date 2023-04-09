@@ -18,8 +18,7 @@ export default function Login({ clientCallback, loginCallback }) {
     try {
       e.preventDefault()
       if (clientId.length > 0) {
-        console.log(clientId)
-        await axios.post("https://stinbankisbackend2-production.up.railway.app/login",`${clientId}`)
+        await axios.post("https://stinbankisbackend2-production.up.railway.app/",`${clientId}`)
         .then(res => {
           console.log(res.data)
           if(res.data == "-1") {

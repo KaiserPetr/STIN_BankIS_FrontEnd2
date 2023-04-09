@@ -48,7 +48,6 @@ const operations = ["+","-"]
 
 export default function Account({ clientId, loginCallback }) {
     
-    //clientId="1234" //TOTO PAK SMAZAT
     let navigate = useNavigate();
     const [transactions, setTransactions] = useState([]);
     const [newAccountChecked, setNewAccountChecked] = React.useState(false);
