@@ -14,7 +14,7 @@ function App(){
   const [exRateDate,setExRateDate] = useState("");
 
   //toto se vola kazdou minutu
-  const MINUTE_MS = 6000;
+  const MINUTE_MS = 60000;
 
   React.useEffect(() => {
       const interval = setInterval(() => {
@@ -30,12 +30,12 @@ function App(){
                 })
               let date = day + '.' + month + '.' + today.getFullYear()
               if (date != exRateDate){
-                  //if (today.getHours() == 14 && today.getMinutes() >= 20 && today.getMinutes <= 50){
+                  if (today.getHours() == 14 && today.getMinutes() >= 20 && today.getMinutes <= 50){
                       axios.get("https://stinbankisbackend2-production.up.railway.app/downloadExchangeRates")
                       .then( res=> {
                           setExRateDate(res.data)
                       })
-                  //}
+                  }
               }
           }
       }, MINUTE_MS);
