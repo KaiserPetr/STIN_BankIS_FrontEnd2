@@ -77,14 +77,22 @@ export default function Account({ clientId, loginCallback }) {
         const interval = setInterval(() => {
             let today = new Date()
             if (!((today.getDay() === 6) || (today.getDay()  === 0))) {
-                let date = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear()
+                let day = today.getDay().toLocaleString('en-US', {
+                    minimumIntegerDigits: 2,
+                    useGrouping: false
+                  })
+                let month = today.getMonth().toLocaleString('en-US', {
+                    minimumIntegerDigits: 2,
+                    useGrouping: false
+                  })
+                let date = day + '.' + month + '.' + today.getFullYear()
                 if (date != exRateDate){
-                    if (today.getHours() == 14 && today.getMinutes() >= 20 && today.getMinutes <= 50){
+                    //if (today.getHours() == 14 && today.getMinutes() >= 20 && today.getMinutes <= 50){
                         axios.get("https://stinbankisbackend2-production.up.railway.app/downloadExchangeRates")
                         .then( res=> {
                             setExRateDate(res.data)
                         })
-                    }
+                    //}
                 }
             }
         }, MINUTE_MS);
