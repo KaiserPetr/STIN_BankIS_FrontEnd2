@@ -10,9 +10,9 @@ function App(){
   const [clientId,setClientId] = React.useState(1);
   const [loginCode,setLoginCode] = React.useState(-1);
   const [exRateDate,setExRateDate] = useState("");
-  
+
   //toto se vola kazdou minutu
-  const MINUTE_MS = 60000;
+  const MINUTE_MS = 6000;
 
   React.useEffect(() => {
       const interval = setInterval(() => {
