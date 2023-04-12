@@ -3,6 +3,8 @@ import './App.css'
 import Login from './components/Login'
 import Verify from './components/Verify'
 import Account from './components/Account'
+import axios from 'axios';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App(){
