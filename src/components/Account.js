@@ -79,7 +79,7 @@ export default function Account({ clientId, loginCallback }) {
             if (!((today.getDay() === 6) || (today.getDay()  === 0))) {
                 let date = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear()
                 if (date != exRateDate){
-                    if (today.getHours() == 10 && today.getMinutes() >= 20 && today.getMinutes <= 50){
+                    if (today.getHours() == 14 && today.getMinutes() >= 20 && today.getMinutes <= 50){
                         axios.get("https://stinbankisbackend2-production.up.railway.app/downloadExchangeRates")
                         .then( res=> {
                             setExRateDate(res.data)
