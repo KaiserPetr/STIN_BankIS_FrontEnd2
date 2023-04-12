@@ -60,7 +60,6 @@ export default function Account({ clientId, loginCallback }) {
     const [payCurrency,setPayCurrency] = useState("");
     const [payOperator,setPayOperator] = useState("");
     const [payResult,setPayResult] = useState("");
-    const [exRateDate,setExRateDate] = useState("");
     const [newAccNum,setNewAccNum] = useState("");
     const [newAccCurr,setNewAccCurr] = useState("");
     const [newAccRes,setNewAccRes] = useState("");
@@ -70,36 +69,7 @@ export default function Account({ clientId, loginCallback }) {
     };
     const [payWrbtr, setPayWrbtr] = useState("");
 
-    //toto se vola kazdou minutu
-    const MINUTE_MS = 60000;
-
-    React.useEffect(() => {
-        const interval = setInterval(() => {
-            let today = new Date()
-            if (!((today.getDay() === 6) || (today.getDay()  === 0))) {
-                let day = today.getDay().toLocaleString('en-US', {
-                    minimumIntegerDigits: 2,
-                    useGrouping: false
-                  })
-                let month = today.getMonth().toLocaleString('en-US', {
-                    minimumIntegerDigits: 2,
-                    useGrouping: false
-                  })
-                let date = day + '.' + month + '.' + today.getFullYear()
-                if (date != exRateDate){
-                    //if (today.getHours() == 14 && today.getMinutes() >= 20 && today.getMinutes <= 50){
-                        axios.get("https://stinbankisbackend2-production.up.railway.app/downloadExchangeRates")
-                        .then( res=> {
-                            setExRateDate(res.data)
-                        })
-                    //}
-                }
-            }
-        }, MINUTE_MS);
-        return () => clearInterval(interval);
-      }, [])
-
-
+    
     React.useEffect(() => {
         try {
             axios.post("https://stinbankisbackend2-production.up.railway.app/getUserData",clientId)
