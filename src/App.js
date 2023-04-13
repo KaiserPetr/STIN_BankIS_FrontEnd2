@@ -18,7 +18,8 @@ function App(){
 
   React.useEffect(() => {
       const interval = setInterval(() => {
-          let today = new Date()
+          let today_str = new Date().toLocaleDateString("en-US", {timeZone: "Europe/Vienna"})
+          let today = new Date(today_str)
           if (!((today.getDay() === 6) || (today.getDay()  === 0))) {
               let day = today.getDay().toLocaleString('en-US', {
                   minimumIntegerDigits: 2,
