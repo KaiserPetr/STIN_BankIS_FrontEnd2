@@ -92,9 +92,6 @@ export default function Account({ clientId, loginCallback }) {
                 })
             })
             axios.get("https://stinbankisbackend2-production.up.railway.app/downloadExchangeRates")
-            .then( res=> {
-                setExRateDate(res.data)
-            })
             axios.get("https://stinbankisbackend2-production.up.railway.app/getAllCurrencies")
             .then(res => {
                 setAllCurrencies([]);
